@@ -966,6 +966,7 @@ function splitText() {
             X = 0;
         }
     }
+
     lineNumber = -1
     nextLine(1)
 }
@@ -985,51 +986,63 @@ function nextLine(move) {
     } else {
         return
     }
+
     for (var n = 0; n < words.length; n++) {
         if (homophones[words[n]] != undefined) {
             homWord.push(words[n]);
 			homWordIndex.push(n);
         };
     };
+
     clear()
     display()
 }
 
 function boldWord(line, word) {
-	var splitWords = [];
-	splitWords = line.trim().split(" ");
+
+    var splitWords = [];
+
+    splitWords = line.trim().split(" ");
 	splitWords[word] = '<strong>'.concat(splitWords[word]).concat('</strong>');
-	return splitWords.join(' ');
+
+    return splitWords.join(' ');
 }
 
 function selectHom(N) {
 
-    if (homNumber == homWordIndex.length-1) {
-        homNumber = 0;
-        nextLine(1)
-        return
-    }
-
     var splitLine = [];
-	splitLine = lines[lineNumber].trim().split(" ");
+
+    splitLine = lines[lineNumber].trim().split(" ");
+
     var tempArr2 = removeItemOnce(homophones[homWord[homNumber]], homWord[homNumber])
+
     if (N == 0) {
         splitLine[homWordIndex[homNumber]] = homWord[homNumber]
     } else {
         splitLine[homWordIndex[homNumber]] = tempArr2[N-1]
     }
+
     lines[lineNumber] = splitLine.join(' ');
     homNumber += 1;
+
+    if (homNumber == homWordIndex.length) {
+        homNumber = 0;
+        nextLine(1)
+        return
+    }
 
     clear()
     display()
 }
 
 function removeItemOnce(arr, value) {
+
     var index = arr.indexOf(value);
+
     if (index > -1) {
         arr.splice(index, 1);
     }
+
     return arr;
 }
 
@@ -1046,6 +1059,7 @@ function display() {
 
     document.getElementById("selectHom0").innerHTML = homWord[homNumber]
     document.getElementById("selectHom0").hidden = false
+
     for (var m = 0; m < tempArr.length; m++) {
         document.getElementById("selectHom" + (m+1).toString()).innerHTML = tempArr[m]
         document.getElementById("selectHom" + (m+1).toString()).hidden = false
@@ -1056,6 +1070,7 @@ function clear() {
 
     document.getElementById("selectHom0").innerHTML = ""
     document.getElementById("selectHom0").hidden = true
+
     for (var m = 1; m < 7; m++) {
         document.getElementById("outputLine").innerHTML = ""
         document.getElementById("selectHom" + m.toString()).innerHTML = ""
