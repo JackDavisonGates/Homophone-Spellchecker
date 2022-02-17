@@ -940,6 +940,9 @@ var excimation = [];
 var question = [];
 var lineNumber = -1;
 var X = 1;
+var homNumber = 0;
+
+clear()
 
 function splitText() {
 
@@ -999,26 +1002,63 @@ function boldWord(line, word) {
 	return splitWords.join(' ');
 }
 
+function selectHom(N) {
+
+    if (homNumber == homWordIndex.length-1) {
+        homNumber = 0;
+        nextLine(1)
+        return
+    }
+
+    var splitLine = [];
+	splitLine = lines[lineNumber].trim().split(" ");
+    var tempArr2 = removeItemOnce(homophones[homWord[homNumber]], homWord[homNumber])
+    if (N == 0) {
+        splitLine[homWordIndex[homNumber]] = homWord[homNumber]
+    } else {
+        splitLine[homWordIndex[homNumber]] = tempArr2[N-1]
+    }
+    lines[lineNumber] = splitLine.join(' ');
+    homNumber += 1;
+
+    clear()
+    display()
+}
+
+function removeItemOnce(arr, value) {
+    var index = arr.indexOf(value);
+    if (index > -1) {
+        arr.splice(index, 1);
+    }
+    return arr;
+}
+
 function display() {
 
     if (homWord.length == 0) {
         document.getElementById("outputLine").innerHTML = lines[lineNumber]
         document.getElementById("hom1").innerHTML = "There is no homophones in this line"
     } else {
-        document.getElementById("outputLine").innerHTML = boldWord(lines[lineNumber], homWordIndex[0]) // Itterator not set
+        document.getElementById("outputLine").innerHTML = boldWord(lines[lineNumber], homWordIndex[homNumber])
     };
 
-    for (var m = 0; m < homWord.length; m++) {
-        document.getElementById("hom" + ((m+1)*2-1).toString()).innerHTML = homWord[m] + ":"
-        document.getElementById("hom" + ((m+1)*2).toString()).innerHTML = homophones[homWord[m]]
+    var tempArr = removeItemOnce(homophones[homWord[homNumber]], homWord[homNumber])
+
+    document.getElementById("selectHom0").innerHTML = homWord[homNumber]
+    document.getElementById("selectHom0").hidden = false
+    for (var m = 0; m < tempArr.length; m++) {
+        document.getElementById("selectHom" + (m+1).toString()).innerHTML = tempArr[m]
+        document.getElementById("selectHom" + (m+1).toString()).hidden = false
     };
 }
 
 function clear() {
 
-    for (var m = 0; m < 10; m++) {
+    document.getElementById("selectHom0").innerHTML = ""
+    document.getElementById("selectHom0").hidden = true
+    for (var m = 1; m < 7; m++) {
         document.getElementById("outputLine").innerHTML = ""
-        document.getElementById("hom" + ((m+1)*2-1).toString()).innerHTML = ""
-        document.getElementById("hom" + ((m+1)*2).toString()).innerHTML = ""
+        document.getElementById("selectHom" + m.toString()).innerHTML = ""
+        document.getElementById("selectHom" + m.toString()).hidden = true
     };
 }
