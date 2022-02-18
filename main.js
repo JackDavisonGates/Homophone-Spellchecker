@@ -2040,10 +2040,3 @@ function clear() {
         document.getElementById("selectHom" + m.toString()).hidden = true
     };
 }
-
-
-
-// sanitizing input function for you to impliment
-
-// import DOMPurify from 'dompurify';
-// const clean = DOMPurify.sanitize(dirty);
