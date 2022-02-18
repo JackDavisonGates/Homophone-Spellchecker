@@ -13,6 +13,12 @@ var blackList = [];
 
 clear()
 
+/**
+ * this takes the text input from the HTML interface
+ * and splits it into lines baces on where an
+ * "." or "!" or "?"
+ * atthe end the nextLine() is called
+ */
 function splitText() {
 
     text = document.getElementById("textIn").value;
@@ -40,6 +46,12 @@ function splitText() {
     nextLine(1)
 }
 
+/**
+ * this takes the next or last line
+ * and finds all the homophones in it
+ * @param {integer} move  - this tells the function to take
+ *                          the next (1) or last (-1) line
+ */
 function nextLine(move) {
 
     words = [];
@@ -67,6 +79,13 @@ function nextLine(move) {
     display()
 }
 
+/**
+ * this takes the current line being worked on
+ * and sets the word being looked at to be bold
+ * @param {string}   line   - the current line being changed
+ * @param {integer}  word   - the wored that needs bold text
+ * @returns {string}        - the retured chaged line
+ */
 function boldWord(line, word) {
 
     var splitWords = [];
@@ -77,6 +96,13 @@ function boldWord(line, word) {
     return splitWords.join(' ');
 }
 
+/**
+ * this takes the current line being worked on
+ * and chages the word being looked at to the
+ * new homophone
+ * @param {integer}  N  - the inxed of the homophone that
+ *                        will replace the current one
+ */
 function selectHom(N) {
 
     var splitLine = [];
@@ -104,6 +130,13 @@ function selectHom(N) {
     display()
 }
 
+/**
+ * this takes an inputed array
+ * and finds then removes a element
+ * @param {array}    arr     - the array that needs a element removed
+ * @param {integer}  value   - the element that needs to be removed
+ * @returns {array}          - the newly chaged array
+ */
 function removeItemOnce(arr, value) {
 
     var index = arr.indexOf(value);
@@ -115,6 +148,13 @@ function removeItemOnce(arr, value) {
     return arr;
 }
 
+/**
+ * this takes a word and adds
+ * it to a blacklist or whiteList
+ * @param {string}  hom        - this is the word to be added
+ * @param {string}  homChange  - this is the alternat word to be added
+ *                               = 0 is used when no alternat is needed
+ */
 function addToList(hom, homChange = 0) {
 
     var tempArr3 = [hom];
@@ -125,13 +165,25 @@ function addToList(hom, homChange = 0) {
         whiteList.push(tempArr3);
         whiteList[whiteList.length-1].push(homChange);
     }
-
 }
 
+/**
+ * this looks for a word in the whiteList and blackList
+ * @param {string}     hom   - this is the word that is being looked for
+ * @returns {integer}        - the array index for the whiteList
+ *                           - -1 is if the word is in no array
+ *                           - -2 is if the word is in the blackList
+ */
 function checkList(hom) {
 
     var bli = blackList.indexOf(hom);
-    var wli = whiteList.indexOf(hom);
+    var wli = -1;
+
+    for (var i = 0; i < whiteList.length; i++) {
+        if (whiteList[i].indexOf(hom) != undefined && whiteList[i].indexOf(hom) == 0) {
+            wli = i;
+        }
+    }
 
     if (-1 != bli) {
         homNumber += 1;
@@ -144,6 +196,10 @@ function checkList(hom) {
     }
 }
 
+/**
+ * this sets the HTML display to display the current
+ * line that is being wored on
+ */
 function display() {
 
     if (homWord.length == 0) {
@@ -162,10 +218,12 @@ function display() {
             document.getElementById("selectHom" + (m+1).toString()).hidden = false
         };
     };
-
-
 }
 
+/**
+ * this sets the HTML display to display
+ * nothing and clears all remaing text
+ */
 function clear() {
 
     document.getElementById("selectHom0").innerHTML = ""
