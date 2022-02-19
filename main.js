@@ -198,7 +198,7 @@ function checkList(hom) {
 
 /**
  * this sets the HTML display to display the current
- * line that is being wored on
+ * line that is being worked on
  */
 function display() {
 
@@ -209,8 +209,11 @@ function display() {
         document.getElementById("outputLine").innerHTML = boldWord(lines[lineNumber], homWordIndex[homNumber])
 
         var tempArr = removeItemOnce(homophones[homWord[homNumber]], homWord[homNumber])
-
-        document.getElementById("selectHom0").innerHTML = homWord[homNumber]
+        
+        document.getElementById("selectHom0").innerHTML = `${homWord[homNumber]} 
+            <span class="phoneticStyle">${definitions[homWord[homNumber].toUpperCase()]['phonetic']}</span><br>
+            <span class="partOfSpeechStyle">${definitions[homWord[homNumber].toUpperCase()]['meanings'][0]['partOfSpeech']}</span><br>
+            <span class="definitionStyle">${definitions[homWord[homNumber].toUpperCase()]['meanings'][0]['definitions'][0]['definition']}</span>`;
         document.getElementById("selectHom0").hidden = false
 
         for (var m = 0; m < tempArr.length; m++) {
