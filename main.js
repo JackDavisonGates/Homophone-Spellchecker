@@ -21,7 +21,7 @@ clear()
  */
 function splitText() {
 
-    text = document.getElementById("textIn").value;
+    text = document.getElementById(`textIn`).value;
 
     while (X == 1) {
         full = text.split(".", 1);
@@ -212,10 +212,10 @@ function display() {
 
         var definitionDispalyText = ''
         for (var d = 0; d < definitions[homWord[homNumber].toUpperCase()]['meanings'][0]['definitions'].length; d++) {
-            definitionDispalyText = definitionDispalyText.concat(`${d+1 + ''}. 
+            definitionDispalyText = definitionDispalyText.concat(`${d+1 + ''}.
                 ${definitions[homWord[homNumber].toUpperCase()]['meanings'][0]['definitions'][d]['definition']}<br>`)
         }
-        
+
         document.getElementById("selectHom0").innerHTML = `<span class="mainWordStyle">${homWord[homNumber]}</span>
             <span class="phoneticStyle">${definitions[homWord[homNumber].toUpperCase()]['phonetic']}</span><br>
             <span class="partOfSpeechStyle">${definitions[homWord[homNumber].toUpperCase()]['meanings'][0]['partOfSpeech']}</span><br>
@@ -227,7 +227,7 @@ function display() {
         for (var m = 0; m < tempArr.length; m++) {
             var definitionDispalyText = ''
             for (var d = 0; d < definitions[tempArr[m].toUpperCase()]['meanings'][0]['definitions'].length; d++) {
-                definitionDispalyText = definitionDispalyText.concat(`${d+1 + ''}. 
+                definitionDispalyText = definitionDispalyText.concat(`${d+1 + ''}.
                     ${definitions[tempArr[m].toUpperCase()]['meanings'][0]['definitions'][d]['definition']}<br>`)
             }
             document.getElementById("selectHom" + (m+1).toString()).innerHTML = `<span class="mainWordStyle">${tempArr[m]}</span>
