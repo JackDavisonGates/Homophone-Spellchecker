@@ -10,19 +10,23 @@
       text-align: top;
       text-decoration: none;
       display: inline-block;
-      font-size: 16px;
       margin: 2px 2px;
       cursor: pointer;
+    }
+    .mainWordStyle {
+      font-size: 30px;
+      line-height: 0.7;
     }
     .phoneticStyle {
       font-size: 16px;
     }
     .partOfSpeechStyle {
-      line-height: 0.5;
+      line-height: 1.7;
       font-size: 16px;
     }
     .definitionStyle {
       font-size: 12px;
+      line-height: 0.7;
     }
     </style>
 </head>
@@ -45,25 +49,66 @@
   </div>
   <div style="width:50%;float:left;">
     <div>
-      <button style="width:100%;height:150px;font-size:30px;cursor:pointer;text-align:left;flex-direction:column;" id="selectHom0" onclick="selectHom(0)"> </button>
+        <div style="width:80%;float:left;">
+          <button style="width:100%;height:150px;cursor:pointer;text-align:left;flex-direction:column;" id="selectHom0" onclick="selectHom(0)"> </button>
+        </div>
+        <div style="width:20%;float:right;height:150px;">
+          <button style="width:100%;height:75px;cursor:pointer;text-align:left;font-size:30px;" id="selectHom0DoAll" onclick="selectHom(0)">Replace All</button>
+          <button style="width:100%;height:75px;cursor:pointer;text-align:left;font-size:30px;" id="selectHom0Ignore" onclick="selectHom(0)">Ignore All</button>
+        </div>
     </div>
     <div>
-      <button style="width:100%;height:150px;font-size:30px;cursor:pointer;text-align:left;flex-direction:column;" id="selectHom1" onclick="selectHom(1)"> </button>
+      <div style="width:80%;float:left;">
+        <button style="width:100%;height:150px;cursor:pointer;text-align:left;flex-direction:column;" id="selectHom1" onclick="selectHom(1)"> </button>
+      </div>
+      <div style="width:20%;float:right;height:150px;">
+        <button style="width:100%;height:75px;cursor:pointer;text-align:left;font-size:30px;" id="selectHom1DoAll" onclick="selectHom(1)">Replace All</button>
+        <button style="width:100%;height:75px;cursor:pointer;text-align:left;font-size:30px;" id="selectHom1Ignore" onclick="selectHom(1)">Ignore All</button>
+      </div>
+    <div>
+      <div style="width:80%;float:left;">
+        <button style="width:100%;height:150px;cursor:pointer;text-align:left;flex-direction:column;" id="selectHom2" onclick="selectHom(2)"> </button>
+      </div>
+      <div style="width:20%;float:right;height:150px;">
+        <button style="width:100%;height:75px;cursor:pointer;text-align:left;font-size:30px;" id="selectHom2DoAll" onclick="selectHom(2)">Replace All</button>
+        <button style="width:100%;height:75px;cursor:pointer;text-align:left;font-size:30px;" id="selectHom2Ignore" onclick="selectHom(2)">Ignore All</button>
+      </div>
     </div>
     <div>
-      <button style="width:100%;height:150px;font-size:30px;cursor:pointer;text-align:left;flex-direction:column;" id="selectHom2" onclick="selectHom(2)"> </button>
+      <div style="width:80%;float:left;">
+        <button style="width:100%;height:150px;cursor:pointer;text-align:left;flex-direction:column;" id="selectHom3" onclick="selectHom(3)"> </button>
+      </div>
+      <div style="width:20%;float:right;height:150px;">
+        <button style="width:100%;height:75px;cursor:pointer;text-align:left;font-size:30px;" id="selectHom3DoAll" onclick="selectHom(3)">Replace All</button>
+        <button style="width:100%;height:75px;cursor:pointer;text-align:left;font-size:30px;" id="selectHom3Ignore" onclick="selectHom(3)">Ignore All</button>
+      </div>
     </div>
     <div>
-      <button style="width:100%;height:150px;font-size:30px;cursor:pointer;text-align:left;flex-direction:column;" id="selectHom3" onclick="selectHom(3)"> </button>
+      <div style="width:80%;float:left;">
+        <button style="width:100%;height:150px;cursor:pointer;text-align:left;flex-direction:column;" id="selectHom4" onclick="selectHom(4)"> </button>
+      </div>
+      <div style="width:20%;float:right;height:150px;">
+        <button style="width:100%;height:75px;cursor:pointer;text-align:left;font-size:30px;" id="selectHom4DoAll" onclick="selectHom(4)">Replace All</button>
+        <button style="width:100%;height:75px;cursor:pointer;text-align:left;font-size:30px;" id="selectHom4Ignore" onclick="selectHom(4)">Ignore All</button>
+      </div>
     </div>
     <div>
-      <button style="width:100%;height:150px;font-size:30px;cursor:pointer;text-align:left;flex-direction:column;" id="selectHom4" onclick="selectHom(4)"> </button>
+      <div style="width:80%;float:left;">
+        <button style="width:100%;height:150px;cursor:pointer;text-align:left;flex-direction:column;" id="selectHom5" onclick="selectHom(5)"> </button>
+      </div>
+      <div style="width:20%;float:right;height:150px;">
+        <button style="width:100%;height:75px;cursor:pointer;text-align:left;font-size:30px;" id="selectHom5DoAll" onclick="selectHom(5)">Replace All</button>
+        <button style="width:100%;height:75px;cursor:pointer;text-align:left;font-size:30px;" id="selectHom5Ignore" onclick="selectHom(5)">Ignore All</button>
+      </div>
     </div>
     <div>
-      <button style="width:100%;height:150px;font-size:30px;cursor:pointer;text-align:left;flex-direction:column;" id="selectHom5" onclick="selectHom(5)"> </button>
-    </div>
-    <div>
-      <button style="width:100%;height:150px;font-size:30px;cursor:pointer;text-align:left;flex-direction:column;" id="selectHom6" onclick="selectHom(6)"> </button>
+      <div style="width:80%;float:left;">
+        <button style="width:100%;height:150px;cursor:pointer;text-align:left;flex-direction:column;" id="selectHom6" onclick="selectHom(6)"> </button>
+      </div>
+      <div style="width:20%;float:right;height:150px;">
+        <button style="width:100%;height:75px;cursor:pointer;text-align:left;font-size:30px;" id="selectHom6DoAll" onclick="selectHom(6)">Replace All</button>
+        <button style="width:100%;height:75px;cursor:pointer;text-align:left;font-size:30px;" id="selectHom6Ignore" onclick="selectHom(6)">Ignore All</button>
+      </div>
     </div>
   </div>
   <script src="homophones.js"></script>

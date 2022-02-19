@@ -209,16 +209,34 @@ function display() {
         document.getElementById("outputLine").innerHTML = boldWord(lines[lineNumber], homWordIndex[homNumber])
 
         var tempArr = removeItemOnce(homophones[homWord[homNumber]], homWord[homNumber])
+
+        var definitionDispalyText = ''
+        for (var d = 0; d < definitions[homWord[homNumber].toUpperCase()]['meanings'][0]['definitions'].length; d++) {
+            definitionDispalyText = definitionDispalyText.concat(`${d+1 + ''}. 
+                ${definitions[homWord[homNumber].toUpperCase()]['meanings'][0]['definitions'][d]['definition']}<br>`)
+        }
         
-        document.getElementById("selectHom0").innerHTML = `${homWord[homNumber]} 
+        document.getElementById("selectHom0").innerHTML = `<span class="mainWordStyle">${homWord[homNumber]}</span>
             <span class="phoneticStyle">${definitions[homWord[homNumber].toUpperCase()]['phonetic']}</span><br>
             <span class="partOfSpeechStyle">${definitions[homWord[homNumber].toUpperCase()]['meanings'][0]['partOfSpeech']}</span><br>
-            <span class="definitionStyle">${definitions[homWord[homNumber].toUpperCase()]['meanings'][0]['definitions'][0]['definition']}</span>`;
+            <span class="definitionStyle">${definitionDispalyText}</span>`;
         document.getElementById("selectHom0").hidden = false
+        document.getElementById("selectHom0DoAll").hidden = false
+        document.getElementById("selectHom0Ignore").hidden = false
 
         for (var m = 0; m < tempArr.length; m++) {
-            document.getElementById("selectHom" + (m+1).toString()).innerHTML = tempArr[m]
+            var definitionDispalyText = ''
+            for (var d = 0; d < definitions[tempArr[m].toUpperCase()]['meanings'][0]['definitions'].length; d++) {
+                definitionDispalyText = definitionDispalyText.concat(`${d+1 + ''}. 
+                    ${definitions[tempArr[m].toUpperCase()]['meanings'][0]['definitions'][d]['definition']}<br>`)
+            }
+            document.getElementById("selectHom" + (m+1).toString()).innerHTML = `<span class="mainWordStyle">${tempArr[m]}</span>
+            <span class="phoneticStyle">${definitions[tempArr[m].toUpperCase()]['phonetic']}</span><br>
+            <span class="partOfSpeechStyle">${definitions[tempArr[m].toUpperCase()]['meanings'][0]['partOfSpeech']}</span><br>
+            <span class="definitionStyle">${definitionDispalyText}</span>`;
             document.getElementById("selectHom" + (m+1).toString()).hidden = false
+            document.getElementById("selectHom" + (m+1).toString() + "DoAll").hidden = false
+            document.getElementById("selectHom" + (m+1).toString() + "Ignore").hidden = false
         };
     };
 }
@@ -231,10 +249,14 @@ function clear() {
 
     document.getElementById("selectHom0").innerHTML = ""
     document.getElementById("selectHom0").hidden = true
+    document.getElementById("selectHom0DoAll").hidden = true
+    document.getElementById("selectHom0Ignore").hidden = true
 
     for (var m = 1; m < 7; m++) {
         document.getElementById("outputLine").innerHTML = ""
         document.getElementById("selectHom" + m.toString()).innerHTML = ""
         document.getElementById("selectHom" + m.toString()).hidden = true
+        document.getElementById("selectHom" + m.toString() + "DoAll").hidden = true
+        document.getElementById("selectHom" + m.toString() + "Ignore").hidden = true
     };
 }
