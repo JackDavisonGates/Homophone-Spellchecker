@@ -38,10 +38,44 @@
   <button onclick="splitText()">Run</button><br><br>
 
   <div style="width:50%;float:left;">
-    <button onclick="nextLine(-1)">Last line</button>
+    <button onclick="nextLine(-1)">Previous line</button>
     <button onclick="nextLine(1)">Next line</button>
+    Font size
+    <select id="displyFontSize">  
+      <option value = 4> 4   
+      </option>  
+      <option value = 6> 6   
+      </option>  
+      <option value = 8> 8  
+      </option>  
+      <option value = 10> 10  
+      </option>
+      <option value = 12> 12   
+      </option>  
+      <option value = 14> 14   
+      </option>  
+      <option value = 16> 16  
+      </option>  
+      <option value = 18> 18  
+      </option>
+      <option value = 20 selected="selected"> 20   
+      </option>  
+      <option value = 22> 22   
+      </option>  
+      <option value = 24> 24  
+      </option>  
+      <option value = 26> 26  
+      </option>
+      <option value = 28> 28   
+      </option>  
+      <option value = 30> 30   
+      </option>  
+    </select>
+    <div id="lineCount" style="display: inline-block;">
+
+    </div>
     <div>
-      <label id="outputLine" style="font-size:20px;"></label>
+      <label id="outputLine"></label>
     </div>
     <div>
       <button id="downloadDocument" onclick="downloadDocument()">Download</button>

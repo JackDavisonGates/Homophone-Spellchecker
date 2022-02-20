@@ -10,6 +10,7 @@ var X = 1;
 var homNumber = 0;
 var whiteList = [];
 var blackList = [];
+var totalLineCount = 0;
 
 clear()
 
@@ -202,11 +203,15 @@ function checkList(hom) {
  */
 function display() {
 
+    document.getElementById("lineCount").innerHTML = `Currenly on line ${lineNumber}/${totalLineCount}`
+
     if (homWord.length == 0) {
         document.getElementById("outputLine").innerHTML = lines[lineNumber]
-        document.getElementById("outputMessage").innerHTML = "There is no homophones in this line"
+        document.getElementById("outputLine").innerHTML = `<span style="font-style:italic;">There are no homophones in this line</span>`
+        document.getElementById("outputLine").style.fontSize = document.getElementById("displyFontSize").value + 'px'
     } else {
         document.getElementById("outputLine").innerHTML = boldWord(lines[lineNumber], homWordIndex[homNumber])
+        document.getElementById("outputLine").style.fontSize = document.getElementById("displyFontSize").value + 'px'
 
         var tempArr = removeItemOnce(homophones[homWord[homNumber]], homWord[homNumber])
 
