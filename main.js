@@ -221,7 +221,6 @@ function display() {
             <span class="partOfSpeechStyle">${definitions[homWord[homNumber].toUpperCase()]['meanings'][0]['partOfSpeech']}</span><br>
             <span class="definitionStyle">${definitionDispalyText}</span>`;
         document.getElementById("selectHom0").hidden = false
-        document.getElementById("selectHom0DoAll").hidden = false
         document.getElementById("selectHom0Ignore").hidden = false
 
         for (var m = 0; m < tempArr.length; m++) {
@@ -236,7 +235,6 @@ function display() {
             <span class="definitionStyle">${definitionDispalyText}</span>`;
             document.getElementById("selectHom" + (m+1).toString()).hidden = false
             document.getElementById("selectHom" + (m+1).toString() + "DoAll").hidden = false
-            document.getElementById("selectHom" + (m+1).toString() + "Ignore").hidden = false
         };
     };
 }
@@ -249,7 +247,6 @@ function clear() {
 
     document.getElementById("selectHom0").innerHTML = ""
     document.getElementById("selectHom0").hidden = true
-    document.getElementById("selectHom0DoAll").hidden = true
     document.getElementById("selectHom0Ignore").hidden = true
 
     for (var m = 1; m < 7; m++) {
@@ -257,6 +254,5 @@ function clear() {
         document.getElementById("selectHom" + m.toString()).innerHTML = ""
         document.getElementById("selectHom" + m.toString()).hidden = true
         document.getElementById("selectHom" + m.toString() + "DoAll").hidden = true
-        document.getElementById("selectHom" + m.toString() + "Ignore").hidden = true
     };
 }
