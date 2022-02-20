@@ -97,6 +97,29 @@ function boldWord(line, word) {
     return splitWords.join(' ');
 }
 
+function listChange() {
+
+    var splitLine2 = [];
+
+    splitLine2 = lines[lineNumber].trim().split(" ");
+
+    if (checkList(homWord[homNumber]) == -2) {
+        homNumber += 1;
+        console.log("homNumber: " + homNumber);
+    } else if (checkList(homWord[homNumber]) > -1) {
+        console.log("whiteList: " + whiteList);
+        console.log("homWord[homNumber]: " + homWord[homNumber]);
+        console.log("homWord: " + homWord);
+        console.log("homNumber: " + homNumber);
+        console.log("checkList(homWord[homNumber]): " + checkList(homWord[homNumber]));
+        console.log("whiteList[checkList(homWord[homNumber])]: " + whiteList[checkList(homWord[homNumber])]);
+        splitLine2[homWordIndex[homNumber]] = whiteList[checkList(homWord[homNumber])][1]
+        lines[lineNumber] = splitLine2.join(' ');
+        homNumber += 1;
+    }
+
+}
+
 /**
  * this takes the current line being worked on
  * and chages the word being looked at to the
@@ -124,9 +147,11 @@ function selectHom(N) {
     if (homNumber == homWordIndex.length) {
         homNumber = 0;
         nextLine(1)
+        listChange()
         return
     }
 
+    listChange()
     clear()
     display()
 }
@@ -152,20 +177,21 @@ function removeItemOnce(arr, value) {
 /**
  * this takes a word and adds
  * it to a blacklist or whiteList
- * @param {string}  hom        - this is the word to be added
- * @param {string}  homChange  - this is the alternat word to be added
- *                               = 0 is used when no alternat is needed
+ * @param {integer}  hom  - this is the index of the word to be added
  */
-function addToList(hom, homChange = 0) {
+function addToList(hom) {
 
-    var tempArr3 = [hom];
+    var tempArr4 = removeItemOnce(homophones[homWord[homNumber]], homWord[homNumber]);
 
-    if (homChange == 0) {
-        blackList.push(hom);
+    if (hom == 0) {
+        blackList.push(homWord[homNumber]);
     } else {
+        var tempArr3 = [homWord[homNumber]];
         whiteList.push(tempArr3);
-        whiteList[whiteList.length-1].push(homChange);
+        whiteList[whiteList.length-1].push(tempArr4[hom-1]);
     }
+
+    selectHom(hom);
 }
 
 /**
@@ -260,4 +286,13 @@ function clear() {
         document.getElementById("selectHom" + m.toString()).hidden = true
         document.getElementById("selectHom" + m.toString() + "DoAll").hidden = true
     };
+}
+
+
+var whiteList2 = {}
+
+
+
+function whitlist() {
+
 }
