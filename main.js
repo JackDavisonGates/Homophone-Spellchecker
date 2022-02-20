@@ -69,8 +69,8 @@ function nextLine(move) {
     }
 
     for (var n = 0; n < words.length; n++) {
-        if (homophones[words[n]] != undefined) {
-            homWord.push(words[n]);
+        if (homophones[words[n].replace("'","-")] != undefined) {
+            homWord.push(words[n].replace("'","-"));
 			homWordIndex.push(n);
         };
     };
@@ -216,7 +216,7 @@ function display() {
                 ${definitions[homWord[homNumber].toUpperCase()]['meanings'][0]['definitions'][d]['definition']}<br>`)
         }
 
-        document.getElementById("selectHom0").innerHTML = `<span class="mainWordStyle">${homWord[homNumber]}</span>
+        document.getElementById("selectHom0").innerHTML = `<span class="mainWordStyle">${homWord[homNumber].replace("-","'")}</span>
             <span class="phoneticStyle">${definitions[homWord[homNumber].toUpperCase()]['phonetic']}</span><br>
             <span class="partOfSpeechStyle">${definitions[homWord[homNumber].toUpperCase()]['meanings'][0]['partOfSpeech']}</span><br>
             <span class="definitionStyle">${definitionDispalyText}</span>`;
@@ -229,7 +229,7 @@ function display() {
                 definitionDispalyText = definitionDispalyText.concat(`${d+1 + ''}.
                     ${definitions[tempArr[m].toUpperCase()]['meanings'][0]['definitions'][d]['definition']}<br>`)
             }
-            document.getElementById("selectHom" + (m+1).toString()).innerHTML = `<span class="mainWordStyle">${tempArr[m]}</span>
+            document.getElementById("selectHom" + (m+1).toString()).innerHTML = `<span class="mainWordStyle">${tempArr[m].replace("-","'")}</span>
             <span class="phoneticStyle">${definitions[tempArr[m].toUpperCase()]['phonetic']}</span><br>
             <span class="partOfSpeechStyle">${definitions[tempArr[m].toUpperCase()]['meanings'][0]['partOfSpeech']}</span><br>
             <span class="definitionStyle">${definitionDispalyText}</span>`;
