@@ -1,4 +1,5 @@
 var text = ``;
+var outputText = ``;
 var lines = [];
 var words = [];
 var homWord = [];
@@ -14,6 +15,10 @@ var totalLineCount = 0;
 var homophonesSkipped = 0;
 var whiteList2 = {}
 
+/**
+ * Check to see if there is a blacklist in local memory
+ * and load it or if not then creat an empty list.
+ */
 if (localStorage.getItem("blacklist") != 'null') {
     var blackList2 = localStorage.getItem("blacklist")
 } else {
@@ -23,10 +28,9 @@ if (localStorage.getItem("blacklist") != 'null') {
 clear()
 
 /**
- * this takes the text input from the HTML interface
- * and splits it into lines baces on where an
- * "." or "!" or "?"
- * atthe end the nextLine() is called
+ * This takes the text input from the HTML interface and
+ * splits it into lines baces on where an "." or "!" or
+ * "?" at the end the nextLine() is called.
  */
 function splitText() {
 
@@ -56,8 +60,8 @@ function splitText() {
 }
 
 /**
- * this takes the next or last line
- * and finds all the homophones in it
+ * This takes the next or last line and finds all
+ * the homophones in it.
  * @param {integer} move  - this tells the function to take
  *                          the next (1) or last (-1) line
  */
@@ -95,8 +99,8 @@ function nextLine(move) {
 }
 
 /**
- * this takes the current line being worked on
- * and sets the word being looked at to be bold
+ * This takes the current line being worked on
+ * and sets the word being looked at to be bold.
  * @param {string}   line   - the current line being changed
  * @param {integer}  word   - the wored that needs bold text
  * @returns {string}        - the retured chaged line
@@ -135,9 +139,8 @@ function listChange() {
 }
 
 /**
- * this takes the current line being worked on
- * and chages the word being looked at to the
- * new homophone
+ * This takes the current line being worked on and chages
+ * the word being looked at to the new homophone.
  * @param {integer}  N  - the inxed of the homophone that
  *                        will replace the current one
  */
@@ -194,8 +197,7 @@ function selectHomByStr(homString) {
 }
 
 /**
- * this takes an inputed array
- * and finds then removes a element
+ * This takes an inputed array and finds then removes a element.
  * @param {array}    arr     - the array that needs a element removed
  * @param {integer}  value   - the element that needs to be removed
  * @returns {array}          - the newly chaged array
@@ -212,7 +214,7 @@ function removeItemOnce(arr, value) {
 }
 
 /**
- * this takes a word and adds
+ * This takes a word and adds
  * it to a blacklist or whiteList
  * @param {integer}  hom  - this is the index of the word to be added
  */
@@ -231,6 +233,11 @@ function addToList(hom) {
     selectHom(hom);
 }
 
+/**
+ * Adds the selected homophone to a whitelist for automatic replacment.
+ * This is a dictoary which contains the selected homophone (key) and
+ * its replacment (value).
+ */
 function skipAll(hom) {
     whiteList2[homWord[homNumber]] = homophones[homWord[homNumber]][hom]
     
@@ -239,6 +246,11 @@ function skipAll(hom) {
     return whiteList2
 }
 
+/**
+ * Adds the selected homophone to a blacklist which causes all future
+ * incidences of that homophone to be ignored. The blacklist is also
+ * stored in lcal memory so this can be persistent across sessions.
+ */
 function blacklistWord() {
     blackList2.push(homWord[homNumber])
 
@@ -250,7 +262,7 @@ function blacklistWord() {
 }
 
 /**
- * this looks for a word in the whiteList and blackList
+ * This looks for a word in the whiteList and blackList.
  * @param {string}     hom   - this is the word that is being looked for
  * @returns {integer}        - the array index for the whiteList
  *                           - -1 is if the word is in no array
@@ -279,8 +291,8 @@ function checkList(hom) {
 }
 
 /**
- * this sets the HTML display to display the current
- * line that is being worked on
+ * This sets the HTML display to display the current line that
+ * is being worked on.
  */
 function display() {
 
@@ -328,8 +340,8 @@ function display() {
 }
 
 /**
- * this sets the HTML display to display
- * nothing and clears all remaing text
+ * This sets the HTML display to display nothing and clears all
+ * remaing text.
  */
 function clear() {
 
@@ -345,6 +357,9 @@ function clear() {
     };
 }
 
+/**
+ * This clears the blacklist from local memory
+ */
 function clearBlacklist() {
     localStorage.setItem("blacklist", 'null');
     blackList2 = []
