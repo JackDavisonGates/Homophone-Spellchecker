@@ -364,3 +364,30 @@ function clearBlacklist() {
     localStorage.setItem("blacklist", 'null');
     blackList2 = []
 }
+
+/**
+ * Allows downloading of a string. Function created by danallison
+ * (https://gist.github.com/danallison/3ec9d5314788b337b682)
+ */
+function downloadString(text, fileType, fileName) {
+    var blob = new Blob([text], { type: fileType });
+  
+    var a = document.createElement('a');
+    a.download = fileName;
+    a.href = URL.createObjectURL(blob);
+    a.dataset.downloadurl = [fileType, a.download, a.href].join(':');
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function() { URL.revokeObjectURL(a.href); }, 1500);
+  }
+
+/**
+ * Assembuls the final file and download it as a .txt file.
+ */
+  function downloadDocument() {
+    outputText = lines.join(". ");
+    outputText = outputText.replaceAll('..  ','. ');
+    downloadString(outputText, "text", "Output.txt");
+}
