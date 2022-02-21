@@ -11,6 +11,14 @@ var homNumber = 0;
 var whiteList = [];
 var blackList = [];
 var totalLineCount = 0;
+var homophonesSkipped = 0;
+var whiteList2 = {}
+
+if (localStorage.getItem("blacklist") != 'null') {
+    var blackList2 = localStorage.getItem("blacklist")
+} else {
+    var blackList2 = []
+}
 
 clear()
 
@@ -70,9 +78,15 @@ function nextLine(move) {
     }
 
     for (var n = 0; n < words.length; n++) {
-        if (homophones[words[n].replace("'","-")] != undefined) {
-            homWord.push(words[n].replace("'","-"));
+
+        var correctedWord = words[n].replace("'","-").replace('.', '')
+        if (blackList2.includes(correctedWord)) {
+            homophonesSkipped += 1;
+            console.log(`${correctedWord} Skipped`)
+        } else if (homophones[correctedWord] != undefined) {
+            homWord.push(correctedWord);
 			homWordIndex.push(n);
+            console.log(`${correctedWord} counted`)
         };
     };
 
@@ -156,6 +170,29 @@ function selectHom(N) {
     display()
 }
 
+function selectHomByStr(homString) {
+
+    var splitLine = [];
+
+    splitLine = lines[lineNumber].trim().split(" ");
+
+    splitLine[homWordIndex[homNumber]] = homString
+
+    lines[lineNumber] = splitLine.join(' ');
+    homNumber += 1;
+
+    if (homNumber == homWordIndex.length) {
+        homNumber = 0;
+        nextLine(1)
+        listChange()
+        return
+    }
+
+    listChange()
+    clear()
+    display()
+}
+
 /**
  * this takes an inputed array
  * and finds then removes a element
@@ -192,6 +229,24 @@ function addToList(hom) {
     }
 
     selectHom(hom);
+}
+
+function skipAll(hom) {
+    whiteList2[homWord[homNumber]] = homophones[homWord[homNumber]][hom]
+    
+    selectHom(hom + 1)
+
+    return whiteList2
+}
+
+function blacklistWord() {
+    blackList2.push(homWord[homNumber])
+
+    selectHom(0)
+
+    localStorage.setItem("blacklist", blackList2);
+
+    return blackList2
 }
 
 /**
@@ -235,6 +290,8 @@ function display() {
         document.getElementById("outputLine").innerHTML = lines[lineNumber]
         document.getElementById("outputLine").innerHTML = `<span style="font-style:italic;">There are no homophones in this line</span>`
         document.getElementById("outputLine").style.fontSize = document.getElementById("displyFontSize").value + 'px'
+    } else if (homWord[homNumber] in whiteList2) {
+        selectHomByStr(whiteList2[homWord[homNumber]]);
     } else {
         document.getElementById("outputLine").innerHTML = boldWord(lines[lineNumber], homWordIndex[homNumber])
         document.getElementById("outputLine").style.fontSize = document.getElementById("displyFontSize").value + 'px'
@@ -288,11 +345,7 @@ function clear() {
     };
 }
 
-
-var whiteList2 = {}
-
-
-
-function whitlist() {
-
+function clearBlacklist() {
+    localStorage.setItem("blacklist", 'null');
+    blackList2 = []
 }

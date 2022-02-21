@@ -74,6 +74,7 @@
     <div id="lineCount" style="display: inline-block;">
 
     </div>
+    <button onclick="clearBlacklist()">Clear Ignored Words</button>
     <div>
       <label id="outputLine"></label>
     </div>
@@ -87,7 +88,7 @@
           <button style="width:100%;height:150px;cursor:pointer;text-align:left;flex-direction:column;" id="selectHom0" onclick="selectHom(0)"> </button>
         </div>
         <div style="width:20%;float:right;height:150px;">
-          <button style="width:100%;height:150px;cursor:pointer;text-align:left;font-size:30px;" id="selectHom0Ignore" onclick="addToList(0)">Ignore All</button>
+          <button style="width:100%;height:150px;cursor:pointer;text-align:left;font-size:30px;" id="selectHom0Ignore" onclick="blacklistWord()">Ignore All</button>
         </div>
     </div>
     <div>
@@ -95,7 +96,7 @@
         <button style="width:100%;height:150px;cursor:pointer;text-align:left;flex-direction:column;" id="selectHom1" onclick="selectHom(1)"> </button>
       </div>
       <div style="width:20%;float:right;height:150px;">
-        <button style="width:100%;height:150px;cursor:pointer;text-align:left;font-size:30px;" id="selectHom1DoAll" onclick="addToList(1)">Replace All</button>
+        <button style="width:100%;height:150px;cursor:pointer;text-align:left;font-size:30px;" id="selectHom1DoAll" onclick="skipAll(0)">Replace All</button>
       </div>
     <div>
       <div style="width:80%;float:left;">
