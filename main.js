@@ -173,6 +173,10 @@ function selectHom(N) {
     display()
 }
 
+/**
+ * This takes the current line being worked on and chages
+ * the word being looked at to the new homophone.
+ */
 function selectHomByStr(homString) {
 
     var splitLine = [];
