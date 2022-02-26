@@ -115,28 +115,28 @@ function boldWord(line, word) {
     return splitWords.join(' ');
 }
 
-function listChange() {
+// function listChange() {
 
-    var splitLine2 = [];
+//     var splitLine2 = [];
 
-    splitLine2 = lines[lineNumber].trim().split(" ");
+//     splitLine2 = lines[lineNumber].trim().split(" ");
 
-    if (checkList(homWord[homNumber]) == -2) {
-        homNumber += 1;
-        console.log("homNumber: " + homNumber);
-    } else if (checkList(homWord[homNumber]) > -1) {
-        console.log("whiteList: " + whiteList);
-        console.log("homWord[homNumber]: " + homWord[homNumber]);
-        console.log("homWord: " + homWord);
-        console.log("homNumber: " + homNumber);
-        console.log("checkList(homWord[homNumber]): " + checkList(homWord[homNumber]));
-        console.log("whiteList[checkList(homWord[homNumber])]: " + whiteList[checkList(homWord[homNumber])]);
-        splitLine2[homWordIndex[homNumber]] = whiteList[checkList(homWord[homNumber])][1]
-        lines[lineNumber] = splitLine2.join(' ');
-        homNumber += 1;
-    }
+//     if (checkList(homWord[homNumber]) == -2) {
+//         homNumber += 1;
+//         console.log("homNumber: " + homNumber);
+//     } else if (checkList(homWord[homNumber]) > -1) {
+//         console.log("whiteList: " + whiteList);
+//         console.log("homWord[homNumber]: " + homWord[homNumber]);
+//         console.log("homWord: " + homWord);
+//         console.log("homNumber: " + homNumber);
+//         console.log("checkList(homWord[homNumber]): " + checkList(homWord[homNumber]));
+//         console.log("whiteList[checkList(homWord[homNumber])]: " + whiteList[checkList(homWord[homNumber])]);
+//         splitLine2[homWordIndex[homNumber]] = whiteList[checkList(homWord[homNumber])][1]
+//         lines[lineNumber] = splitLine2.join(' ');
+//         homNumber += 1;
+//     }
 
-}
+// }
 
 /**
  * This takes the current line being worked on and chages
@@ -164,11 +164,11 @@ function selectHom(N) {
     if (homNumber == homWordIndex.length) {
         homNumber = 0;
         nextLine(1)
-        listChange()
+        //listChange()
         return
     }
 
-    listChange()
+    //listChange()
     clear()
     display()
 }
@@ -191,11 +191,11 @@ function selectHomByStr(homString) {
     if (homNumber == homWordIndex.length) {
         homNumber = 0;
         nextLine(1)
-        listChange()
+        //listChange()
         return
     }
 
-    listChange()
+    //listChange()
     clear()
     display()
 }
