@@ -35,33 +35,39 @@ clear()
  * splits it into lines baces on where an "." or "!" or
  * "?" at the end the nextLine() is called.
  */
+// function splitText() {
+
+//     text = document.getElementById(`textIn`).value;
+//     outputText = text;
+
+//     while (X == 1) {
+//         full = text.split(".", 1);
+//         excimation = text.split("!", 1);
+//         question = text.split("?", 1);
+//         if (full[0].length < excimation[0].length && full[0].length < question[0].length) {
+//             lines.push(full[0] + ".");
+//             text = text.slice(full[0].length + 1);
+//         } else if (excimation[0].length < full[0].length && excimation[0].length < question[0].length) {
+//             lines.push(excimation[0] + "!");
+//             text = text.slice(excimation[0].length + 1);
+//         } else if (question[0].length < full[0].length && question[0].length < excimation[0].length) {
+//             lines.push(question[0] + "?");
+//             text = text.slice(question[0].length + 1);
+//         } else {
+//             lines.push(text);
+//             X = 0;
+//         }
+//     }
+
+//     lineNumber = -1
+//     nextLine(1)
+// }
+
 function splitText() {
-
     text = document.getElementById(`textIn`).value;
-    outputText = text;
-
-    while (X == 1) {
-        full = text.split(".", 1);
-        excimation = text.split("!", 1);
-        question = text.split("?", 1);
-        if (full[0].length < excimation[0].length && full[0].length < question[0].length) {
-            lines.push(full[0] + ".");
-            text = text.slice(full[0].length + 1);
-        } else if (excimation[0].length < full[0].length && excimation[0].length < question[0].length) {
-            lines.push(excimation[0] + "!");
-            text = text.slice(excimation[0].length + 1);
-        } else if (question[0].length < full[0].length && question[0].length < excimation[0].length) {
-            lines.push(question[0] + "?");
-            text = text.slice(question[0].length + 1);
-        } else {
-            lines.push(text);
-            X = 0;
-        }
-    }
-
-    lineNumber = -1
-    nextLine(1)
+    return text.match(/\w+|\s+|[^\s\w]+/g)
 }
+
 
 function findWord(word) {
     var quieryWord = word.replace('.', '').replace('?', '').replace('!', '');
