@@ -17,6 +17,8 @@ var whiteList2 = {};
 var startIndex = 0;
 var wordIndex = [0,0];
 var homWordOutputIndex = [];
+var wordCount = 0;
+var homWordIndex = [];
 
 /**
  * Check to see if there is a blacklist in local memory
@@ -65,9 +67,20 @@ clear()
 
 function splitText() {
     text = document.getElementById(`textIn`).value;
-    return text.match(/\w+|\s+|[^\s\w]+/g)
-}
+    text = text.match(/\w+|\s+|[^\s\w]+/g)
 
+    for (n = 0; n < text.length; n++) {
+        correctedWord = text[n].replace("'","-")
+        if (blackList2.includes(correctedWord)) {
+            homophonesSkipped += 1;
+        } else if (homophones[correctedWord] != undefined) {
+            homWord.push(correctedWord);
+            homWordIndex.push(n);
+        };
+    }
+
+    display()
+}
 
 function findWord(word) {
     var quieryWord = word.replace('.', '').replace('?', '').replace('!', '');
@@ -124,15 +137,15 @@ function nextLine(move) {
  * @param {integer}  word   - the wored that needs bold text
  * @returns {string}        - the retured chaged line
  */
-function boldWord(line, word) {
+// function boldWord(line, word) {
 
-    var splitWords = [];
+//     var splitWords = [];
 
-    splitWords = line.trim().split(" ");
-	splitWords[word] = '<strong>'.concat(splitWords[word]).concat('</strong>');
+//     splitWords = line.trim().split(" ");
+// 	splitWords[word] = '<strong>'.concat(splitWords[word]).concat('</strong>');
 
-    return splitWords.join(' ');
-}
+//     return splitWords.join(' ');
+// }
 
 // function listChange() {
 
@@ -335,18 +348,32 @@ function checkList(hom) {
  */
 function display() {
 
-    document.getElementById("lineCount").innerHTML = `Currenly on line ${lineNumber}/${totalLineCount}`
+    //document.getElementById("lineCount").innerHTML = `Currenly on line ${lineNumber}/${totalLineCount}`
+    if (homWordIndex[homNumber]-50 > 0) {
+        trailingWords = homWordIndex[homNumber]-50
+    } else {
+        trailingWords = 0
+    }
+
+    if (homWordIndex[homNumber]+50 < text.length) {
+        leadingWords = homWordIndex[homNumber]+50
+    } else {
+        leadingWords = text.length
+    }
+
+    outputText = text
+    outputText[homWordIndex[homNumber]] = `<strong>${outputText[homWordIndex[homNumber]]}</strong>`
+    outputText = outputText.slice(trailingWords,leadingWords).join('')
 
     if (homWord.length == 0) {
-        document.getElementById("outputLine").innerHTML = lines[lineNumber]
-        document.getElementById("outputLine").innerHTML = `<span style="font-style:italic;">There are no homophones in this line</span>`
+        document.getElementById("outputLine").innerHTML = 'No Homophones Found'
         document.getElementById("outputLine").style.fontSize = document.getElementById("displyFontSize").value + 'px'
     } else if (homWord[homNumber] in whiteList2) {
         selectHomByStr(whiteList2[homWord[homNumber]]);
     } else {
-        document.getElementById("outputLine").innerHTML = boldWord(lines[lineNumber], homWordIndex[homNumber])
+        document.getElementById("outputLine").innerHTML = outputText
         document.getElementById("outputLine").style.fontSize = document.getElementById("displyFontSize").value + 'px'
-
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         var tempArr = removeItemOnce(homophones[homWord[homNumber]], homWord[homNumber])
 
         var definitionDispalyText = ''
