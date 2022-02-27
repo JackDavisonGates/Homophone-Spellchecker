@@ -13,7 +13,10 @@ var whiteList = [];
 var blackList = [];
 var totalLineCount = 0;
 var homophonesSkipped = 0;
-var whiteList2 = {}
+var whiteList2 = {};
+var startIndex = 0;
+var wordIndex = [0,0];
+var homWordOutputIndex = [];
 
 /**
  * Check to see if there is a blacklist in local memory
@@ -35,6 +38,7 @@ clear()
 function splitText() {
 
     text = document.getElementById(`textIn`).value;
+    outputText = text;
 
     while (X == 1) {
         full = text.split(".", 1);
@@ -57,6 +61,17 @@ function splitText() {
 
     lineNumber = -1
     nextLine(1)
+}
+
+function findWord(word) {
+    var quieryWord = word.replace('.', '').replace('?', '').replace('!', '');
+    console.log(quieryWord)
+    startIndex = wordIndex[0]
+    wordIndex[0] = outputText.substring(startIndex).indexOf(quieryWord);
+    console.log(wordIndex)
+    console.log(quieryWord.length)
+    console.log(startIndex)
+    return [startIndex+wordIndex[0],wordIndex[0]+quieryWord.length];
 }
 
 /**
@@ -86,11 +101,9 @@ function nextLine(move) {
         var correctedWord = words[n].replace("'","-").replace('.', '')
         if (blackList2.includes(correctedWord)) {
             homophonesSkipped += 1;
-            console.log(`${correctedWord} Skipped`)
         } else if (homophones[correctedWord] != undefined) {
             homWord.push(correctedWord);
 			homWordIndex.push(n);
-            console.log(`${correctedWord} counted`)
         };
     };
 
@@ -138,6 +151,13 @@ function boldWord(line, word) {
 
 // }
 
+function setCharAt(str,index,chr) {
+    //console.log(`preciding str: ${str.substring(0,index[0])}`)
+    //console.log(`replacment: ${chr}`)
+    //console.log(`post str: ${str.substring(index[1])}`)
+    return str.substring(0,index[0]) + chr + str.substring(index[1]);
+}
+
 /**
  * This takes the current line being worked on and chages
  * the word being looked at to the new homophone.
@@ -148,14 +168,22 @@ function selectHom(N) {
 
     var splitLine = [];
 
+    console.log(wordIndex)
+
     splitLine = lines[lineNumber].trim().split(" ");
 
     var tempArr2 = removeItemOnce(homophones[homWord[homNumber]], homWord[homNumber])
 
     if (N == 0) {
+        quieryWordIndex = findWord(splitLine[homWordIndex[homNumber]])
+        console.log(quieryWordIndex)
         splitLine[homWordIndex[homNumber]] = homWord[homNumber]
+        outputText = setCharAt(outputText,quieryWordIndex,homWord[homNumber].replace("-","'"));
     } else {
+        quieryWordIndex = findWord(splitLine[homWordIndex[homNumber]])
+        console.log(quieryWordIndex)
         splitLine[homWordIndex[homNumber]] = tempArr2[N-1]
+        outputText = setCharAt(outputText,quieryWordIndex,tempArr2[N-1].replace("-","'"));
     }
 
     lines[lineNumber] = splitLine.join(' ');
@@ -163,6 +191,7 @@ function selectHom(N) {
 
     if (homNumber == homWordIndex.length) {
         homNumber = 0;
+        homWordOutputIndex = [];
         nextLine(1)
         //listChange()
         return
