@@ -8,6 +8,7 @@ var blackList = [];
 var totalLineCount = 0;
 var homophonesSkipped = 0;
 var homWordIndex = [];
+var suroundingText = 50;
 
 /**
  * Check to see if there is a blacklist in local memory
@@ -116,7 +117,7 @@ function removeItemOnce(arr, value) {
  */
 function skipAll(hom) {
     whiteList[homWord[homNumber]] = homophones[homWord[homNumber]][hom]
-    
+
     selectHom(hom + 1)
 
     return whiteList
@@ -149,14 +150,14 @@ function display() {
     } else {
 
         //Calculates the amount of leading and prociding text to display on the screen.
-        if (homWordIndex[homNumber]-50 > 0) {
-            trailingWords = homWordIndex[homNumber]-50
+        if (homWordIndex[homNumber]-suroundingText > 0) {
+            trailingWords = homWordIndex[homNumber]-suroundingText
         } else {
             trailingWords = 0
         }
 
-        if (homWordIndex[homNumber]+50 < text.length) {
-            leadingWords = homWordIndex[homNumber]+50
+        if (homWordIndex[homNumber]+suroundingText < text.length) {
+            leadingWords = homWordIndex[homNumber]+suroundingText
         } else {
             leadingWords = text.length
         }
@@ -247,7 +248,7 @@ function clearBlacklist() {
  */
 function downloadString(text, fileType, fileName) {
     var blob = new Blob([text], { type: fileType });
-  
+
     var a = document.createElement('a');
     a.download = fileName;
     a.href = URL.createObjectURL(blob);
@@ -258,6 +259,12 @@ function downloadString(text, fileType, fileName) {
     document.body.removeChild(a);
     setTimeout(function() { URL.revokeObjectURL(a.href); }, 1500);
   }
+
+function chageSuroundingText(newLength) {
+    suroundingText = newLength;
+    clear();
+    display();
+}
 
 /**
  * Assembuls the final file and download it as a .txt file.
