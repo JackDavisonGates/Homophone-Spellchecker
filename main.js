@@ -261,9 +261,15 @@ function downloadString(text, fileType, fileName) {
   }
 
 function chageSuroundingText(newLength) {
-    suroundingText = newLength;
+    suroundingText = parseInt(newLength);
     clear();
     display();
+}
+
+var slider = document.getElementById("SuroundingTextRange");
+
+slider.oninput = function() {
+    chageSuroundingText(slider.value);
 }
 
 /**
